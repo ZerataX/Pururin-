@@ -343,7 +343,7 @@ function compareStrings(a, b){
                 }
                 console.log(originalword);
                 console.log(differentword);
-                if(b.indexOf(originalword, x) > 0 && originalword !== "" && originalword !== " "){
+                if(b.indexOf(originalword, x + n) > 0 && originalword !== "" && originalword !== " "){
                     for (y = x + n; y < b.indexOf(originalword, x + n); y++){
                         differentword += b.charAt(y);
                     }   
