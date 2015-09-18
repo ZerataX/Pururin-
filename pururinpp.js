@@ -6,6 +6,7 @@
 // @collaborator PetersPark
 // @include      *.pururin.com/* 
 // @include      http://pururin.com/*
+// @namespace    https://greasyfork.org/users/3068
 // ==/UserScript==
 
 /*
