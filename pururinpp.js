@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name         Pururin+ 
-// @version      0.34
+// @version      0.35
 // @description  improves Pururin (comments, forum, gallery edits, ...)
 // @author       PetersPark 
 // @include      *.pururin.com/* 
