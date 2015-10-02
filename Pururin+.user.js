@@ -278,6 +278,7 @@ var spamuser = '{"users": [' +
     '{"user":"k" , "link":""},' +
     '{"user":"Check this out!" , "link":""},' +
     '{"user":"mentinos" , "link":"http://forum.pururin.com/index.php?action=profile;u=14710"},' +
+    '{"user":"veh" , "link":"http://forum.pururin.com/index.php?action=profile;u=15051"},' +
     '{"user":"example" , "link":"http://forum.pururin.com/index.php?action=profile;u=userid"}]}';
 
 
