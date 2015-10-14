@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name         Pururin+ 
-// @version      0.36
+// @version      0.37
 // @description  improves Pururin (comments, forum, gallery edits, ...)
 // @author       ZerataX 
 // @collaborator PetersPark
@@ -8,15 +8,6 @@
 // @include      http://pururin.com/*
 // @namespace    https://greasyfork.org/users/3068
 // ==/UserScript==
-
-/*
-for(i = 0; i < document.getElementsByClassName("js-tooltip-tag").length; i++){
-    var tlink = String(document.getElementsByClassName('js-tooltip-tag')[i].getAttribute('href')).replace("/browse/","");
-    var tid = tlink.slice(0,tlink.indexOf("/10/"));
-    var tname = tlink.slice(tlink.indexOf(tid),tlink.indexOf("/10/"));
-    console.log("{'tag':'" + document.getElementsByClassName("js-tooltip-tag")[i].title + "' , 'id':'" + tid + "'}");
-}
-*/
 var tags = '{"tags": [' +
     '{"tag":"Ahegao / アヘ顔" , "id":"1376"},' +
     '{"tag":"Alien / 異星 Extraterrestrial life" , "id":"13793"},' +
@@ -259,7 +250,10 @@ var spamlinks = '{"links": [' +
     '{"link":"www.sh.st/srUhM"},' +
     '{"link":"www.asmhentai.com"},' +
     '{"link":"www.spankjizz.com/hentai.html"},' +
-    '{"link":"www.example.com"},' +
+    '{"link":"www.sh.st/axJJ4"},' +
+    '{"link":"www.sh.st/kKxjS"},' +
+    '{"link":"www.goo.gl/XwdpdM"},' +
+    '{"link":"www.vc-models.com"},' +
     '{"link":"www.sh.st/xE8Fe"}]}';
 
 var spamuser = '{"users": [' +
@@ -344,8 +338,6 @@ function compareStrings(a, b){
                         }
                     }  
                 }
-                console.log(originalword);
-                console.log(differentword);
                 if(b.indexOf(originalword, x + n) > 0 && originalword !== "" && originalword !== " "){
                     for (y = x + n; y < b.indexOf(originalword, x + n); y++){
                         differentword += b.charAt(y);
@@ -353,7 +345,7 @@ function compareStrings(a, b){
                     n = b.indexOf(originalword, x + n) - x;   
                     finalstring += "<a class = green>" + differentword + "</a>";
                     x--;
-                }else{              
+                }else{                
                     originalstring += "<a class = red>" + originalword + "</a>";
                     x += originalword.length - 1; 
                     n -= originalword.length;
@@ -379,6 +371,18 @@ function hideComment(i){
     comment[i].style.display = 'none';    
 }
 
+function sort(object) {
+    var entry = document.getElementsByClassName("table-data")[0].children[1].children;
+    for (var i = 0; i < entry.length; i++) {
+        if (entry[i].children[0].innerHTML == object || object == "all") {
+            entry[i].style.display = 'table-row'; 
+            entry[i].className = "";
+        }else {
+            entry[i].style.display = 'none'; 
+            entry[i].className = "hidden";
+        }
+    }
+}
 function show() {
     if (visible === 0) {
         visible = 1;
@@ -401,7 +405,7 @@ function show() {
             if(window.location.hostname == "forum.pururin.com"){document.getElementsByClassName("#spam")[i].style.display = "none";}
             if(window.location.hostname != "forum.pururin.com"){document.getElementsByClassName("comment-bad hidden")[i].style.display = "none";}
         }
-
+a
     }
 }
 
@@ -415,6 +419,12 @@ if(window.location.hostname != "forum.pururin.com") {
                 }
             }
         }, 100);
+    }
+    if(String(window.location.href).slice(19,43) == String("contribute/contributions")){ 
+        document.getElementsByClassName("block")[1].innerHTML =  document.getElementsByClassName("block")[1].innerHTML + "Important: <button id='all' class='btn btn-gray comment-post'><i class='icon-eye-open'></i> <span>All</span></button> |<button id='uploads' class='btn btn-gray comment-post'><i class='icon-upload'></i> <span>Uploads</span></button> | <button id='tags' class='btn btn-gray comment-post'><i class='icon-tags'></i> <span>Tags</span></button>";
+        document.getElementById("uploads").onclick=function(){sort('Upload');}
+        document.getElementById("all").onclick=function(){sort('all');}
+        document.getElementById("tags").onclick=function(){sort('New Tag');}
     }
     if(String(window.location.href).slice(19,34) == String("contribute/view")){ 
         if(document.getElementsByClassName("gallery-cover").length > 0){
