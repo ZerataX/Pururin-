@@ -1,13 +1,13 @@
 // ==UserScript==
 // @name         Pururin+ 
-// @version      0.37
+// @version      0.38
 // @description  improves Pururin (comments, forum, gallery edits, ...)
-// @author       ZerataX 
-// @collaborator PetersPark
+// @author       PetersPark 
 // @include      *.pururin.com/* 
 // @include      http://pururin.com/*
-// @namespace    https://greasyfork.org/users/3068
+// @require      http://ajax.googleapis.com/ajax/libs/jquery/1.3.2/jquery.min.js
 // ==/UserScript==
+
 var tags = '{"tags": [' +
     '{"tag":"Ahegao / アヘ顔" , "id":"1376"},' +
     '{"tag":"Alien / 異星 Extraterrestrial life" , "id":"13793"},' +
@@ -373,16 +373,49 @@ function hideComment(i){
 
 function sort(object) {
     var entry = document.getElementsByClassName("table-data")[0].children[1].children;
+    var visible = 0;
     for (var i = 0; i < entry.length; i++) {
-        if (entry[i].children[0].innerHTML == object || object == "all") {
+        if ( object == "New Tag" && ( String(entry[i].children[1].innerHTML).indexOf("[Artist]") > 0 || String(entry[i].children[1].innerHTML).indexOf("[Circle]") > 0 || String(entry[i].children[1].innerHTML).indexOf("[Convention]") > 0 ) || object == "Upload" && entry[i].children[0].innerHTML == object || object == "all") {
             entry[i].style.display = 'table-row'; 
             entry[i].className = "";
-        }else {
+            visible ++;
+        }else{
             entry[i].style.display = 'none'; 
             entry[i].className = "hidden";
         }
     }
+    document.getElementById("visiblecontributions").innerHTML = "<h3>visible contributions: </h3>" + visible;
 }
+
+function SortByDate (a,b)
+{
+    var a = new Date($(a).attr("data-date")),
+        b = new Date($(b).attr("data-date"));
+    return (b.getTime() - a.getTime());
+}
+
+function SortByRank(a, b)
+{
+    var a = parseInt($(a).attr("oldrank")),
+        b = parseInt($(b).attr("oldrank"));
+    return b-a;
+}
+
+function rank(order) {
+    document.getElementsByClassName("table-data")[0].setAttribute("id", "pending");
+    //--- Get the table we want to sort.
+    var jTableToSort    = $("table#pending");
+
+    //--- Get the rows to sort, but skip the first row, since it contains column titles.
+    var jRowsToSort     = jTableToSort.find ("tr:gt(0)");
+    if(order == "submit"){
+        //--- Sort the rows in place.
+        jRowsToSort.sort(SortByDate).each(function(){jTableToSort.prepend(this);})
+    }else{
+        jRowsToSort.sort(SortByRank).each(function(){jTableToSort.prepend(this);})
+    }
+}
+
 function show() {
     if (visible === 0) {
         visible = 1;
@@ -405,7 +438,7 @@ function show() {
             if(window.location.hostname == "forum.pururin.com"){document.getElementsByClassName("#spam")[i].style.display = "none";}
             if(window.location.hostname != "forum.pururin.com"){document.getElementsByClassName("comment-bad hidden")[i].style.display = "none";}
         }
-a
+
     }
 }
 
@@ -421,10 +454,20 @@ if(window.location.hostname != "forum.pururin.com") {
         }, 100);
     }
     if(String(window.location.href).slice(19,43) == String("contribute/contributions")){ 
-        document.getElementsByClassName("block")[1].innerHTML =  document.getElementsByClassName("block")[1].innerHTML + "Important: <button id='all' class='btn btn-gray comment-post'><i class='icon-eye-open'></i> <span>All</span></button> |<button id='uploads' class='btn btn-gray comment-post'><i class='icon-upload'></i> <span>Uploads</span></button> | <button id='tags' class='btn btn-gray comment-post'><i class='icon-tags'></i> <span>Tags</span></button>";
+        var rows = document.getElementsByClassName("table-data")[0].children[1].children;
+        var oldrank = [];
+        var d = [];
+        for (var i = 0; i < rows.length; i++) {
+            rows[i].setAttribute("oldrank", i);
+            d[i] = new Date(String(rows[i].children[3].innerHTML).replace(",","").replace(" at",""));
+            rows[i].setAttribute("data-date", d[i]);
+        }
+        document.getElementsByClassName("block")[1].innerHTML =  document.getElementsByClassName("block")[1].innerHTML + "Important: <button id='all' class='btn btn-gray comment-post'><i class='icon-eye-open'></i> <span>All</span></button> | <button id='uploads' class='btn btn-gray comment-post'><i class='icon-upload'></i> <span>Uploads</span></button> | <button id='tags' class='btn btn-gray comment-post'><i class='icon-tags'></i> <span>Tags</span></button><br>Sort by: <button id='sort-submit' class='btn btn-gray comment-post'><i class=''></i> <span>Submit date</span></button> | <button id='sort-update' class='btn btn-gray comment-post'><i class=''></i><span>Last update</span></button><br><span class='label label-warning' id='visiblecontributions'></span>";
         document.getElementById("uploads").onclick=function(){sort('Upload');}
         document.getElementById("all").onclick=function(){sort('all');}
         document.getElementById("tags").onclick=function(){sort('New Tag');}
+        document.getElementById("sort-submit").onclick=function(){rank('submit');}
+        document.getElementById("sort-update").onclick=function(){rank('update');}
     }
     if(String(window.location.href).slice(19,34) == String("contribute/view")){ 
         if(document.getElementsByClassName("gallery-cover").length > 0){
