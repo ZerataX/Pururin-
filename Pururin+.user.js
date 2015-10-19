@@ -5,7 +5,6 @@
 // @author       PetersPark 
 // @include      *.pururin.com/* 
 // @include      http://pururin.com/*
-// @require      http://ajax.googleapis.com/ajax/libs/jquery/1.3.2/jquery.min.js
 // ==/UserScript==
 
 var tags = '{"tags": [' +
