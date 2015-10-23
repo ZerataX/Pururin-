@@ -256,7 +256,7 @@ var spamlinks = '{"links": [' +
     '{"link":"www.sh.st/xE8Fe"}]}';
 
 var spamuser = '{"users": [' +
-    '{"user":"DomBB" , "link":"http://forum.pururin.com/index.php?action=profile;u=7342"},' +
+    //'{"user":"DomBB" , "link":"http://forum.pururin.com/index.php?action=profile;u=7342"},' +
     '{"user":"cbyj223" , "link":"http://forum.pururin.com/index.php?action=profile;u=13395"},' +
     '{"user":"Vesta" , "link":"http://forum.pururin.com/index.php?action=profile;u=14130"},' +
     '{"user":"danle" , "link":"http://forum.pururin.com/index.php?action=profile;u=11513"},' +
