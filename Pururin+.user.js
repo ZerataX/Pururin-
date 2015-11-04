@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Pururin+ 
-// @version      0.38
-// @description  improves Pururin (comments, forum, gallery edits, ...)
+// @version      1.00
+// @description  ;_;
 // @author       PetersPark 
 // @include      *.pururin.com/* 
 // @include      http://pururin.com/*
@@ -256,7 +256,7 @@ var spamlinks = '{"links": [' +
     '{"link":"www.sh.st/xE8Fe"}]}';
 
 var spamuser = '{"users": [' +
-    //'{"user":"DomBB" , "link":"http://forum.pururin.com/index.php?action=profile;u=7342"},' +
+    '{"user":"DomBB" , "link":"http://forum.pururin.com/index.php?action=profile;u=7342"},' +
     '{"user":"cbyj223" , "link":"http://forum.pururin.com/index.php?action=profile;u=13395"},' +
     '{"user":"Vesta" , "link":"http://forum.pururin.com/index.php?action=profile;u=14130"},' +
     '{"user":"danle" , "link":"http://forum.pururin.com/index.php?action=profile;u=11513"},' +
@@ -442,6 +442,9 @@ function show() {
 }
 
 if(window.location.hostname != "forum.pururin.com") {
+    if(document.getElementsByClassName("cf-error-details cf-error-522").length > 0) {
+document.getElementsByClassName("cf-error-details cf-error-522")[0].innerHTML = '<iframe width="560" height="315" src="https://www.youtube.com/embed/VEJCIeUkA2Q?rel=0&amp&start=277&autoplay=1;controls=0" frameborder="0" allowfullscreen></iframe>';
+    }
     if(String(window.location.href).slice(19,25) == String("finish") && document.getElementsByClassName("bold").length > 0){ 
         setInterval(function(){
             var oldtag = String(document.getElementsByClassName("bold")[1].innerHTML)
