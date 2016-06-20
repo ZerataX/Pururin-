@@ -2,7 +2,7 @@
 // @name         Pururin+ 
 // @version      1.00
 // @description  ;_;
-// @author       PetersPark 
+// @author       ZerataX
 // @include      *.pururin.com/* 
 // @include      http://pururin.com/*
 // ==/UserScript==
