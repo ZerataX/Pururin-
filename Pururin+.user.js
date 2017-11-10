@@ -2,6 +2,7 @@
 // @name         Pururin+ 
 // @version      1.00
 // @description  ;_;
+// @license      GPL-3.0
 // @author       ZerataX
 // @include      *.pururin.com/* 
 // @include      http://pururin.com/*
