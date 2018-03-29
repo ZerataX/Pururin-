@@ -1,11 +1,11 @@
 // ==UserScript==
 // @name         Pururin+ 
-// @version      1.00
+// @version      1.01
 // @description  ;_;
 // @author       ZerataX
 // @namespace    mail@zera.tax
 // @license      Unlicense
-// @updateURL    https://openuserjs.org/meta/ZerataX/My_Script.meta.js
+// @updateURL    https://openuserjs.org/meta/ZerataX/pururin+.meta.js
 // @include      *.pururin.com/* 
 // @include      http://pururin.com/*
 // ==/UserScript==
