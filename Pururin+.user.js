@@ -2,8 +2,10 @@
 // @name         Pururin+ 
 // @version      1.00
 // @description  ;_;
-// @license      GPL-3.0
 // @author       ZerataX
+// @namespace    mail@zera.tax
+// @license      Unlicense
+// @updateURL    https://openuserjs.org/meta/ZerataX/My_Script.meta.js
 // @include      *.pururin.com/* 
 // @include      http://pururin.com/*
 // ==/UserScript==
