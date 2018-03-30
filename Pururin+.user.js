@@ -5,7 +5,7 @@
 // @author       ZerataX
 // @namespace    mail@zera.tax
 // @license      Unlicense
-// @updateURL    https://openuserjs.org/meta/ZerataX/pururin+.meta.js
+// @updateURL    https://openuserjs.org/meta/ZerataX/Pururin+.meta.js
 // @include      *.pururin.com/* 
 // @include      http://pururin.com/*
 // ==/UserScript==
